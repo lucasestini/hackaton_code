@@ -1,4 +1,3 @@
 # hackaton_code
 
-Python 3.7
-VTK library
+Python 3.7, VTK library required
