@@ -1,0 +1,98 @@
+Thu Mar 11 17:42:15 2021    profile_renderer.dat
+
+         517 function calls (515 primitive calls) in 0.042 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.017    0.017    0.042    0.042 /home/lucas/atlas_work/code/hackaton_profile/vtk_robot/project_module/vtk_render.py:119(project_3Dshape)
+        1    0.012    0.012    0.012    0.012 {method 'Update' of 'vtkmodules.vtkCommonExecutionModel.vtkAlgorithm' objects}
+        1    0.004    0.004    0.004    0.004 {method 'reduce' of 'numpy.ufunc' objects}
+        1    0.004    0.004    0.004    0.004 {method 'repeat' of 'numpy.ndarray' objects}
+    22/20    0.003    0.000    0.008    0.000 {built-in method numpy.core._multiarray_umath.implement_array_function}
+        1    0.001    0.001    0.001    0.001 {method 'astype' of 'numpy.ndarray' objects}
+        1    0.001    0.001    0.001    0.001 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/_methods.py:87(_clip_dep_invoke_with_casting)
+        6    0.000    0.000    0.000    0.000 {method 'Update' of 'vtkmodules.vtkRenderingCore.vtkPolyDataMapper' objects}
+        1    0.000    0.000    0.000    0.000 {method 'Render' of 'vtkmodules.vtkRenderingOpenGL2.vtkXOpenGLRenderWindow' objects}
+        1    0.000    0.000    0.000    0.000 {flip}
+        1    0.000    0.000    0.042    0.042 /home/lucas/atlas_work/code/hackaton_profile/vtk_robot/project_module/project_main.py:71(project_3Dshape)
+        1    0.000    0.000    0.042    0.042 <string>:1(<module>)
+        1    0.000    0.000    0.042    0.042 {built-in method builtins.exec}
+        5    0.000    0.000    0.000    0.000 {built-in method numpy.empty}
+      159    0.000    0.000    0.000    0.000 {method 'SetPoint' of 'vtkmodules.vtkCommonCore.vtkPoints' objects}
+        1    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/vtkmodules/util/numpy_support.py:201(vtk_to_numpy)
+      159    0.000    0.000    0.000    0.000 {method 'InsertCellPoint' of 'vtkmodules.vtkCommonDataModel.vtkCellArray' objects}
+        2    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/_methods.py:72(_clip_dep_is_scalar_nan)
+        2    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/vtkmodules/util/numpy_support.py:73(get_vtk_to_numpy_typemap)
+        5    0.000    0.000    0.001    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/numeric.py:144(ones)
+        1    0.000    0.000    0.000    0.000 {method 'GetOutput' of 'vtkmodules.vtkRenderingCore.vtkWindowToImageFilter' objects}
+        1    0.000    0.000    0.001    0.001 {method 'clip' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/lib/shape_base.py:512(expand_dims)
+        5    0.000    0.000    0.000    0.000 {built-in method numpy.zeros}
+        1    0.000    0.000    0.000    0.000 {method 'SetPosition' of 'vtkmodules.vtkRenderingCore.vtkCamera' objects}
+        2    0.000    0.000    0.004    0.002 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/fromnumeric.py:52(_wrapfunc)
+        5    0.000    0.000    0.001    0.000 <__array_function__ internals>:2(copyto)
+        1    0.000    0.000    0.000    0.000 {method 'GetActiveCamera' of 'vtkmodules.vtkRenderingCore.vtkRenderer' objects}
+        5    0.000    0.000    0.000    0.000 {method 'SetNumberOfPoints' of 'vtkmodules.vtkCommonCore.vtkPoints' objects}
+        1    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/lib/twodim_base.py:152(eye)
+        1    0.000    0.000    0.001    0.001 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/fromnumeric.py:2033(clip)
+        2    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/fromnumeric.py:3075(ndim)
+        2    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/_methods.py:82(_clip_dep_is_byte_swapped)
+        1    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/numeric.py:1308(normalize_axis_tuple)
+        8    0.000    0.000    0.002    0.000 <__array_function__ internals>:2(concatenate)
+        1    0.000    0.000    0.000    0.000 {built-in method numpy.frombuffer}
+        1    0.000    0.000    0.000    0.000 {method 'GetPointData' of 'vtkmodules.vtkCommonDataModel.vtkDataSet' objects}
+        1    0.000    0.000    0.000    0.000 {method 'SetMatrix' of 'vtkmodules.vtkCommonTransforms.vtkTransform' objects}
+        4    0.000    0.000    0.000    0.000 <__array_function__ internals>:2(dot)
+        3    0.000    0.000    0.000    0.000 {built-in method numpy.array}
+        5    0.000    0.000    0.000    0.000 {method 'Reset' of 'vtkmodules.vtkCommonDataModel.vtkCellArray' objects}
+        4    0.000    0.000    0.000    0.000 {method 'InsertNextCell' of 'vtkmodules.vtkCommonDataModel.vtkCellArray' objects}
+        1    0.000    0.000    0.000    0.000 {method 'GetScalars' of 'vtkmodules.vtkCommonDataModel.vtkDataSetAttributes' objects}
+        5    0.000    0.000    0.000    0.000 {method 'SetLines' of 'vtkmodules.vtkCommonDataModel.vtkPolyData' objects}
+        1    0.000    0.000    0.001    0.001 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/_methods.py:106(_clip)
+        2    0.000    0.000    0.000    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+        8    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/multiarray.py:143(concatenate)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+        1    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/vtkmodules/util/numpy_support.py:93(get_numpy_array_type)
+        1    0.000    0.000    0.000    0.000 {method 'SetFocalPoint' of 'vtkmodules.vtkRenderingCore.vtkCamera' objects}
+        1    0.000    0.000    0.000    0.000 {method 'SetViewUp' of 'vtkmodules.vtkRenderingCore.vtkCamera' objects}
+        1    0.000    0.000    0.000    0.000 <__array_function__ internals>:2(expand_dims)
+        1    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/lib/shape_base.py:600(<listcomp>)
+        1    0.000    0.000    0.004    0.004 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/_methods.py:53(_any)
+        1    0.000    0.000    0.004    0.004 <__array_function__ internals>:2(repeat)
+        2    0.000    0.000    0.000    0.000 <__array_function__ internals>:2(ndim)
+        1    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/numeric.py:1358(<listcomp>)
+        2    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/_asarray.py:14(asarray)
+        1    0.000    0.000    0.004    0.004 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/fromnumeric.py:437(repeat)
+        1    0.000    0.000    0.000    0.000 {method 'flatten' of 'numpy.ndarray' objects}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1009(_handle_fromlist)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+        1    0.000    0.000    0.000    0.000 {method 'SetCenter' of 'vtkmodules.vtkFiltersSources.vtkSphereSource' objects}
+        1    0.000    0.000    0.000    0.000 {method 'SetViewAngle' of 'vtkmodules.vtkRenderingCore.vtkCamera' objects}
+        1    0.000    0.000    0.000    0.000 {method 'SetWindowCenter' of 'vtkmodules.vtkRenderingCore.vtkCamera' objects}
+        1    0.000    0.000    0.000    0.000 {method 'SetUserTransform' of 'vtkmodules.vtkRenderingCore.vtkCamera' objects}
+        1    0.000    0.000    0.000    0.000 {method 'SetInput' of 'vtkmodules.vtkRenderingCore.vtkWindowToImageFilter' objects}
+        1    0.000    0.000    0.000    0.000 {method 'GetDimensions' of 'vtkmodules.vtkCommonDataModel.vtkImageData' objects}
+        5    0.000    0.000    0.000    0.000 {method 'SetPoints' of 'vtkmodules.vtkCommonDataModel.vtkPointSet' objects}
+        1    0.000    0.000    0.001    0.001 <__array_function__ internals>:2(clip)
+        1    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/_asarray.py:86(asanyarray)
+        1    0.000    0.000    0.004    0.004 {method 'any' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method numpy.core._multiarray_umath.normalize_axis_index}
+        5    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/multiarray.py:1043(copyto)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.iter}
+       10    0.000    0.000    0.000    0.000 {built-in method builtins.len}
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.next}
+        1    0.000    0.000    0.000    0.000 {method 'keys' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 {method 'SetClippingRange' of 'vtkmodules.vtkRenderingCore.vtkCamera' objects}
+        2    0.000    0.000    0.000    0.000 {method 'GetNumberOfComponents' of 'vtkmodules.vtkCommonCore.vtkAbstractArray' objects}
+        1    0.000    0.000    0.000    0.000 {method 'GetNumberOfTuples' of 'vtkmodules.vtkCommonCore.vtkAbstractArray' objects}
+        1    0.000    0.000    0.000    0.000 {method 'GetDataType' of 'vtkmodules.vtkCommonCore.vtkUnsignedCharArray' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        1    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/lib/shape_base.py:508(_expand_dims_dispatcher)
+        1    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/fromnumeric.py:2029(_clip_dispatcher)
+        2    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/fromnumeric.py:3071(_ndim_dispatcher)
+        1    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/fromnumeric.py:433(_repeat_dispatcher)
+        4    0.000    0.000    0.000    0.000 /home/lucas/anaconda3/envs/atlas_gpu_tf1/lib/python3.7/site-packages/numpy/core/multiarray.py:706(dot)
+
+
