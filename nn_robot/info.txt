@@ -1,0 +1,5 @@
+NN robot model
+
+input: 6 normalized kinematics variables
+output: projection mask
+architecture: 2 generators-like, sum of output logits and final sigmoid
