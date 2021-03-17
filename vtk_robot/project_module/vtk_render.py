@@ -197,8 +197,7 @@ class render_shape():
 
         arr_ = cv2.flip(numpy_support.vtk_to_numpy(vtk_array).reshape(height, width, components), 0)
 
-
-        arr = 1 - (arr_ != [25, 51, 102]).any(2).astype(int)
+        arr = 1 - (arr_ != [26, 51, 102]).any(2).astype(int)
 
         arr = np.clip(np.concatenate([np.zeros([1,760]),arr[:-1,:]], axis=0) + np.concatenate([arr[1:,:], np.zeros([1,760])], axis=0) +np.concatenate([np.zeros([570,1]), arr[:, :-1]], axis=1) + np.concatenate([arr[:,1:], np.zeros([570,1])], axis=1),0.,1.)
         arr = 1 - arr

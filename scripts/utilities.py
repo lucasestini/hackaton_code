@@ -2,6 +2,7 @@ import os
 import numpy as np
 
 def get_dir():
+    #return os.getcwd()[:-13]
     return os.getcwd()[:-8]
 
 def combine_left_right(vl,bl,vr,br):
