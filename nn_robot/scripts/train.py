@@ -25,8 +25,8 @@ if __name__ == '__main__':
     dataset_train = os.path.join(root_dir,"data/tfr_kine_dataset/train/")
     dataset_test = os.path.join(root_dir,"data/tfr_kine_dataset/test/")
 
-    batch_size = 128
-    valid_size = 64
+    batch_size = 32
+    valid_size = 16
 
     buffer_size_dataset = 500
 
@@ -62,7 +62,7 @@ if __name__ == '__main__':
     outputs_path_rooth = os.path.join(root_dir,"nn_robot/results/results_1/")
     restore = False
     model_to_load_path = None
-    trainer.train(outputs_path_rooth, display_step=100, restore=restore, model_to_load_path=model_to_load_path)
+    trainer.train(outputs_path_rooth, display_step=5000000, restore=restore, model_to_load_path=model_to_load_path)
 
 
 

@@ -177,7 +177,7 @@ class Trainer(object):
 
             self.loss_train_left.append(loss_l) 
             self.loss_train_right.append(loss_r)        
-            self.f1_train.append(f1)        
+            self.f1_train.append(np.mean(f1))        
 
         else:
             _, loss_l, loss_r, f1, summary, gt_mask, pred_mask = sess.run([self.train_step, self.net.cost_l, 
@@ -261,10 +261,16 @@ class Trainer(object):
                 self.loss_train_left = []
                 self.loss_train_right = []
                 self.f1_train = []
+                s = time.time()
+                i_c = 0
                 while True:
                     try:
                         global_iter = self.train_funct(sess, global_iter, global_epoch + 1)
+                        i_c += 1
                     except tf.errors.OutOfRangeError:
+                        t_epoch = time.time() - s
+                        print("epoch run in {:.2f} ({:.5f}s/iter)".format(t_epoch, t_epoch/i_c))
+                        exit()
                         global_epoch += 1
                         self.net.save(self.saver, sess, model_path, global_epoch)
                         self.get_train_summaries_and_reinitialize(global_epoch)
