@@ -2,8 +2,6 @@ import numpy as np
 import os
 from PIL import Image
 from util import image2tanh
-from sklearn.utils import shuffle
-import matplotlib.pyplot as plt
 from tfr_utilities_test import prepare_dataset
 
 class data_provider():

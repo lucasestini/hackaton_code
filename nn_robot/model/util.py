@@ -84,9 +84,9 @@ def save_images(predictions, prediction_path, global_epoch, mode):
 
         img = Image.fromarray(conc)
         draw = ImageDraw.Draw(img)
-        font = ImageFont.truetype("/home/lucas/atlas_work/datasets/other_resources/nimbus-sans-l/NimbusSanL-Bol.otf", 35)
+        font = ImageFont.truetype("/p/home/jusers/sestini1/juwels/shared/hackaton_code/data/fonts/NimbusSanL-Bol.otf", 35)
         i_c = 0
-        captions = ["Ground Truth", "Predicted Mask", "Overlap: {:.2f}".format(f1[i]*100)]
+        captions = ["Ground Truth", "Predicted Mask", "Overlap: {:.2f}%".format(f1[i]*100)]
         for w in range(1):
             for h in range(3):
                 draw.text((20 + pm.shape[1]*h, 20 + pm.shape[0]*w), captions[i_c], 255, font = font)

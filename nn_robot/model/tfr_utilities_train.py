@@ -1,7 +1,5 @@
 import os
 import numpy as np 
-from sklearn.utils import shuffle
-from sklearn.model_selection import train_test_split
 import tensorflow.compat.v1 as tf
 tf.disable_eager_execution()
 from PIL import Image

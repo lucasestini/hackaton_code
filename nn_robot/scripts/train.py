@@ -1,5 +1,7 @@
 import sys
-sys.path.insert(0, "/home/lucas/nn_robot_new/model/")
+import os
+root_dir = "/p/home/jusers/sestini1/juwels/shared/hackaton_code/" #change
+sys.path.insert(0, os.path.join(root_dir,"nn_robot/model/"))
 import whole_model
 from data_provider_train import data_provider as data_provider_train
 from data_provider_test import data_provider as data_provider_test
@@ -20,12 +22,13 @@ if __name__ == '__main__':
     get_available_gpus()
     print("\n\n\n")
 
-    dataset_train = "/home/lucas/tfr_new_dataset_kine/tfr_new_dataset_kine_train/"
-    dataset_valid = "/home/lucas/tfr_new_dataset_kine/tfr_new_dataset_kine_test/"
-    batch_size = 32
-    valid_size = 16
+    dataset_train = os.path.join(root_dir,"data/tfr_kine_dataset/train/")
+    dataset_test = os.path.join(root_dir,"data/tfr_kine_dataset/test/")
 
-    buffer_size_dataset = 200
+    batch_size = 128
+    valid_size = 64
+
+    buffer_size_dataset = 500
 
     epochs = 500
     augment = False
@@ -45,7 +48,7 @@ if __name__ == '__main__':
 
     graph_valid = tf.Graph()
     with graph_valid.as_default():
-        data_generator_valid = data_provider_test(dataset_valid, valid_size,)
+        data_generator_valid = data_provider_test(dataset_test, valid_size,)
     print("---Generator Built")
 
     optimizer = "adam"
@@ -56,10 +59,10 @@ if __name__ == '__main__':
     trainer = whole_model.Trainer([data_generator_train, data_generator_valid], graph_valid, optimizer=optimizer, opt_kwargs=opt_args)
     print("---Trainer Built")
 
-    outputs_path_rooth = "/home/lucas/nn_robot_new/results/results_1/"
+    outputs_path_rooth = os.path.join(root_dir,"nn_robot/results/results_1/")
     restore = False
     model_to_load_path = None
-    trainer.train(outputs_path_rooth, display_step=5, restore=restore, model_to_load_path=model_to_load_path)
+    trainer.train(outputs_path_rooth, display_step=100, restore=restore, model_to_load_path=model_to_load_path)
 
 
 

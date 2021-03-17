@@ -7,9 +7,7 @@ from nn_util import *
 from util import *
 from robot_nn import *
 from PIL import Image
-from sklearn.utils import shuffle
-from tensorflow.python.client import device_lib
-
+import nvtx.plugins.tf as nvtx_tf
 
 
     
@@ -18,11 +16,14 @@ class model(object):
 
         self.mask = tf.round(tf.clip_by_value(mask_l + mask_r, 0., 1.))
 
-
+        kine_l, nvtx_context = nvtx_tf.ops.start(kine_l, message='proj_left',domain_name='Forward')
         with tf.variable_scope("robot_l"):
             self.proj_logits_l = create_robot_new(kine_l, is_training)
+        self.proj_logits_l = nvtx_tf.ops.end(self.proj_logits_l, nvtx_context)
+        kine_r, nvtx_context = nvtx_tf.ops.start(kine_r, message='proj_right',domain_name='Forward')
         with tf.variable_scope("robot_r"):
             self.proj_logits_r = create_robot_new(kine_r, is_training)
+        self.proj_logits_r = nvtx_tf.ops.end(self.proj_logits_r, nvtx_context)
 
         self.proj_sigm_l = tf.nn.sigmoid(self.proj_logits_l)
         self.proj_sigm_r = tf.nn.sigmoid(self.proj_logits_r)
@@ -136,6 +137,7 @@ class Trainer(object):
             update_ops_left = tf.get_collection(tf.GraphKeys.UPDATE_OPS, scope = "robot_l")
             update_ops_right = tf.get_collection(tf.GraphKeys.UPDATE_OPS, scope = "robot_r")
             update_ops = update_ops_left+update_ops_right
+
             with tf.control_dependencies(update_ops):
                 train_step = optimizer.minimize(self.net.cost_l+self.net.cost_r, var_list=vars_train)
             return train_step

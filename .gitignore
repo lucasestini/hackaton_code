@@ -1,4 +1,6 @@
 tfr*
-./profiling
+profiling
 results
 *.pyc
+.ipynb_*
+bash_scripts
