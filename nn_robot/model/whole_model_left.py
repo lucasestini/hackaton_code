@@ -16,23 +16,18 @@ from nvtx.plugins.tf.estimator import NVTXHook
 class model(object):
     def create_model(self, mask_l, mask_r, kine_l, kine_r, is_training):
 
-        self.mask = tf.round(tf.clip_by_value(mask_l + mask_r, 0., 1.))
+        self.mask = tf.round(tf.clip_by_value(mask_l, 0., 1.))
 
         with tf.variable_scope("robot_l"):
             self.proj_logits_l = create_robot_new(kine_l, is_training,"Left")
-        with tf.variable_scope("robot_r"):
-            self.proj_logits_r = create_robot_new(kine_r, is_training,"Right")
 
         self.proj_sigm_l = tf.nn.sigmoid(self.proj_logits_l)
-        self.proj_sigm_r = tf.nn.sigmoid(self.proj_logits_r)
 
-
-        self.pred_mask = tf.round(tf.clip_by_value(tf.round(self.proj_sigm_l) + tf.round(self.proj_sigm_r),0., 1.))
+        self.pred_mask = tf.round(tf.clip_by_value(tf.round(self.proj_sigm_l),0., 1.))
 
 
         with tf.name_scope("cost"):
             self.cost_l = self._get_dice_coef_loss(self.proj_sigm_l, mask_l)
-            self.cost_r = self._get_dice_coef_loss(self.proj_sigm_r, mask_r)
 
 
         with tf.name_scope("accuracy"):
@@ -131,16 +126,12 @@ class Trainer(object):
             #optimizer = tf.train.experimental.enable_mixed_precision_graph_rewrite(tf.train.AdamOptimizer(learning_rate=learning_rate_node, beta1 = beta1))
             optimizer = tf.train.AdamOptimizer(learning_rate=learning_rate_node, beta1 = beta1)
             vars_left = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES,scope="robot_l")
-            vars_right = tf.get_collection(tf.GraphKeys.TRAINABLE_VARIABLES,scope="robot_r")
-            vars_train = vars_left + vars_right
+            vars_train = vars_left 
             update_ops_left = tf.get_collection(tf.GraphKeys.UPDATE_OPS, scope = "robot_l")
             update_ops_right = tf.get_collection(tf.GraphKeys.UPDATE_OPS, scope = "robot_r")
             update_ops = update_ops_left+update_ops_right
             with tf.control_dependencies(update_ops):
-                train_step_left = optimizer.minimize(self.net.cost_l, var_list=vars_left)
-                train_step_right = optimizer.minimize(self.net.cost_r, var_list=vars_right)
-                train_step = tf.group([train_step_left, train_step_right])
-
+                train_step = optimizer.minimize(self.net.cost_l, var_list=vars_train)
             return train_step
 
     def _initialize(self):
@@ -152,7 +143,6 @@ class Trainer(object):
         with tf.name_scope("training"):
             with tf.name_scope("cost"):
                 summaries.append(tf.summary.scalar('left', self.net.cost_l))
-                summaries.append(tf.summary.scalar('right', self.net.cost_r))
 
             with tf.name_scope("metrics"):
                 summaries.append(tf.summary.scalar('f1', tf.reduce_mean(self.net.f1)))
@@ -162,32 +152,27 @@ class Trainer(object):
     def get_train_summaries_and_reinitialize(self, global_epoch):                
         summary = tf.Summary()
         summary.value.add(tag="training_epoch/loss_l", simple_value=np.mean(self.loss_train_left))
-        summary.value.add(tag="training_epoch/loss_r", simple_value=np.mean(self.loss_train_right))
 
         summary.value.add(tag="training_epoch/f1", simple_value=np.mean(self.f1_train))
         self.summary_writer.add_summary(summary, global_epoch)
         self.loss_train_left = []
-        self.loss_train_right = []
         self.f1_train = []
 
     def train_funct(self, sess, global_iter, global_epoch):
         if not global_iter % self.display_step == 0:
-            _, loss_l, loss_r, f1, summary = sess.run([self.train_step, self.net.cost_l, self.net.cost_r, self.net.f1, self.summaries_train])
+            _, loss_l, f1, summary = sess.run([self.train_step, self.net.cost_l, self.net.f1, self.summaries_train])
             
             self.summary_writer.add_summary(summary, global_iter)
 
             self.loss_train_left.append(loss_l) 
-            self.loss_train_right.append(loss_r)        
             self.f1_train.append(np.mean(f1))        
 
         else:
-            _, loss_l, loss_r, f1, summary, gt_mask, pred_mask = sess.run([self.train_step, self.net.cost_l, 
-                self.net.cost_r, self.net.f1, self.summaries_train, self.net.mask, self.net.pred_mask])
+            _, loss_l, f1, summary, gt_mask, pred_mask = sess.run([self.train_step, self.net.cost_l, self.net.f1, self.summaries_train, self.net.mask, self.net.pred_mask])
 
             self.summary_writer.add_summary(summary, global_iter)
 
             self.loss_train_left.append(loss_l) 
-            self.loss_train_right.append(loss_r)        
             self.f1_train.append(np.mean(f1))      
         
             pred_mask_ = [sigm2image(pred_mask[0])]
@@ -265,7 +250,6 @@ class Trainer(object):
 
             for epoch in range(total_epochs):
                 self.loss_train_left = []
-                self.loss_train_right = []
                 self.f1_train = []
                 s = time.time()
                 i_c = 0

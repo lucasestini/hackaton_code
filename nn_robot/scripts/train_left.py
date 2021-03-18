@@ -2,12 +2,13 @@ import sys
 import os
 root_dir = "/p/home/jusers/sestini1/juwels/shared/hackaton_code/" #change
 sys.path.insert(0, os.path.join(root_dir,"nn_robot/model/"))
-import whole_model
+import whole_model_left as whole_model
 from data_provider_train import data_provider as data_provider_train
 from data_provider_test import data_provider as data_provider_test
 import tensorflow as tf 
 from tensorflow.python.client import device_lib
 os.environ['TF_GPU_THREAD_MODE'] = 'gpu_private'
+
 
 def get_available_gpus():
     local_device_protos = device_lib.list_local_devices()
@@ -60,7 +61,7 @@ if __name__ == '__main__':
     trainer = whole_model.Trainer([data_generator_train, data_generator_valid], graph_valid, optimizer=optimizer, opt_kwargs=opt_args)
     print("---Trainer Built")
 
-    outputs_path_rooth = os.path.join(root_dir,"nn_robot/results/results_1/")
+    outputs_path_rooth = os.path.join(root_dir,"nn_robot/results/results_1_left/")
     restore = False
     model_to_load_path = None
     trainer.train(outputs_path_rooth, display_step=5000000, restore=restore, model_to_load_path=model_to_load_path)

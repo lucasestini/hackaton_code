@@ -3,6 +3,7 @@ import numpy as np
 import tensorflow.compat.v1 as tf
 tf.disable_eager_execution()
 from PIL import Image
+import nvtx.plugins.tf as nvtx_tf
 
 
 
@@ -19,6 +20,7 @@ def parse(serialized, shape=(570, 760, 3), shape_mask=(570, 760, 1)):
     parsed_example = tf.io.parse_single_example(serialized=serialized, features=features)
 
 
+
     ml = parsed_example['left']  # Get the image as raw bytes.
     ml = tf.image.decode_image(ml)  # Decode the raw bytes so it becomes a tensor with type.
     mr = parsed_example['right']  # Get the image as raw bytes.
@@ -31,9 +33,13 @@ def parse(serialized, shape=(570, 760, 3), shape_mask=(570, 760, 1)):
 
 
 def read_tfrs_augm(tf_v, batch_size, buffer_size, AUTOTUNE, augment, preprocess_f=None):
+
+
     dataset = tf_v.interleave(lambda x: tf.data.TFRecordDataset(x, num_parallel_reads=os.cpu_count()),
                               block_length=buffer_size, cycle_length=100,
                               num_parallel_calls=tf.data.experimental.AUTOTUNE)
+
+
 
     dataset = dataset.map(parse,
                           num_parallel_calls=tf.data.experimental.AUTOTUNE)  # parse tfrecords. Parameter num_parallel_calls may help performance.
@@ -48,6 +54,7 @@ def read_tfrs_augm(tf_v, batch_size, buffer_size, AUTOTUNE, augment, preprocess_
     dataset = dataset.shuffle(buffer_size)
 
     dataset = dataset.batch(batch_size).prefetch(1)
+
 
     return dataset
 
